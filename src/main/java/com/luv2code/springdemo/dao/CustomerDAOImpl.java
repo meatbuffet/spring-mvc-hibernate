@@ -11,27 +11,34 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class CustomerDAPImpl implements CustomerDAO {
+public class CustomerDAOImpl implements CustomerDAO {
 
     //need to inject the session factory
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<Customer> getCustomers() {
 
         //get the current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
 
         //create a query
-        Query<Customer> theQuery = currentSession.createQuery("from Customer", Customer.class);
+        Query<Customer> theQuery = currentSession.createQuery("from Customer order by lastName", Customer.class);
 
         // execute query and get result list
         List<Customer> customers = theQuery.getResultList();
 
+
         //return the results
         return customers;
+    }
+
+    @Override
+    public void saveCustomer(Customer theCustomer) {
+        Session currentSession=sessionFactory.getCurrentSession();
+
+        currentSession.save(theCustomer);
     }
 }
 
