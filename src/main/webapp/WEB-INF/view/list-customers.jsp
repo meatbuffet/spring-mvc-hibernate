@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 
@@ -26,6 +27,12 @@
 	<div id="container">
 
 		<div id="content">
+            <!--  add a search box -->
+            <form:form action="search" method="GET">
+                Search customer: <input type="text" name="theSearchName" />
+
+                <input type="submit" value="Search" class="add-button" />
+            </form:form>
 
 <!-- put new button: Add Customer -->
 <input type="button" value="Add Customer"
@@ -61,7 +68,7 @@ class="add-button"
 						<a href="${updateLink}">Update</a>
 						|
 						<a href="${deleteLink}"
-						onclick="if(!(confirm('Are you sure wat to delete this customer?'))) return false">Delete</a>
+						onclick="if(!(confirm('Are you sure want to delete this customer?'))) return false">Delete</a>
 						</td>
 					</tr>
 
